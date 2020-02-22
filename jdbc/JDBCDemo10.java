@@ -46,6 +46,7 @@ public class JDBCDemo10 {
             //提交事务
             conn.commit();
         } catch (Exception e) {
+	
             //事务回滚
             try {
                 if(conn != null) {
