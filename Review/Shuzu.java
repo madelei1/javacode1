@@ -1,11 +1,12 @@
 package Review;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Shuzu {
 
     public static void main(String[] args) {
-        int arr[]  = {1,2,3,4,5,9,7,8};
+        int arr[]  = {1,2,3,4,5,9,8,7,10};
         int arr1[] = {1,2,3,4,5,6};
         String s = Arrays.toString(change(arr));
         System.out.println(s);
@@ -16,6 +17,15 @@ public class Shuzu {
         System.out.println(erFen(arr1,3));
         System.out.println(judge(arr));
         System.out.println(judge(arr1));
+        String s1 = Arrays.toString(paiXu(arr));
+        System.out.println(s1);
+        String s2 = Arrays.toString(reverse(arr1));
+        String s3 = Arrays.toString(reverse(arr));
+        System.out.println(s2);
+        System.out.println(s3);
+        //int[] b = new int[arr1.length];
+        //System.out.println(Arrays.toString(b));
+        System.out.println(Arrays.toString(transform(arr)));
 
     }
 
@@ -120,7 +130,54 @@ public class Shuzu {
         return true;
 
     }
-
+    //冒泡排序
+    //每次尝试找到当前待排序区间中小(或大)的元素, 放到数组前面(或后面).
+    public static int[] paiXu(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length-1; j++) {
+                if (arr[j] > arr[j+1]) {
+                    int tem = arr[j+1];
+                    arr[j+1] = arr[j];
+                    arr[j] = tem;
+                }
+            }
+        }
+        return arr;
+    }
+    //数组的逆序
+    //思路
+    //设定两个下标, 分别指向第一个元素和后一个元素. 交换两个位置的元素. 然后让前一个下标自增, 后一个下标自减, 循环继续即可
+    public static int[] reverse(int[] arr) {
+        int left = 0;
+        int right = arr.length-1;
+        while (right >= left) {
+            int tmp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = tmp;
+            left ++;
+            right --;
+        }
+        return arr;
+    }
+    //数组的数字排序--给定一个整型数组, 将所有的偶数放在前半部分, 将所有的奇数放在数组后半部分
+    //设定两个下标分别指向第一个元素和后一个元素.
+    //用前一个下标从左往右找到第一个奇数, 用后一个下标从右往左找到第一个偶数, 然后交换两个位置的元素. 依次循环即可
+    public static int[] transform(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {         // 该循环结束, left 就指向了一个奇数
+            while (left < right && arr[left] % 2 == 0) {
+                left++;
+            }         // 该循环结束, right 就指向了一个偶数
+            while (left < right && arr[right] % 2 != 0) {
+                right--;
+            }         // 交换两个位置的元素
+            int tmp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = tmp;
+        }
+        return arr;
+    }
 
 
 }
