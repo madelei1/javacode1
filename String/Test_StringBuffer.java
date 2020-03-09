@@ -36,9 +36,10 @@ public class Test_StringBuffer {
         String str3 = n.toString();
         System.out.println(str3);
 
-        //StringBuffer转化为String--方法三，通过字符串截取方法
+        //StringBuffer转化为String--方法三，通过字符串截方法
         String str4 = n.substring(0,n.length());
         System.out.println(str4);
+
 
 
 
