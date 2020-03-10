@@ -1,5 +1,5 @@
 package String;
-
+//返回子字符串的索引值，没有就返回-1
 public class IndexOf0 {
     public static void main(String[] args) {
         String s = "hello world";
