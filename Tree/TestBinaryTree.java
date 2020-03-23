@@ -87,5 +87,39 @@ public class TestBinaryTree {
         return getKLevelSize(root.right,k-1)+getKLevelSize(root.left,k-1);
 
     }
+    // 查找 val 所在结点，没有找到返回 null
+    // 按照 根 -> 左子树 -> 右子树的顺序进行查找
+    // 一旦找到，立即返回，不需要继续在其他位置查找
+    Node find(Node root, int val){
+        if (root == null) {
+            return null;
+        }
+        if (root.value == val) {
+            return root;
+        }
+        Node ret = find(root.left,val);
+        if(ret != null) {
+            return ret;
+        }
+        ret = find(root.right,val);
+        if(ret != null) {
+            return ret;
+        }
+        return null;
+
+    }
+    // 获取二叉树的高度
+    //先判断左树的高度，在判断右树的高度，最大的为高度
+    int getHeight(Node root){
+        if (root == null) {
+            return 0;
+        }
+        int x = getHeight(root.left);
+        int y = getHeight(root.right);
+        return x > y ? x + 1 : y + 1;
+
+    }
+
+
 
 }
