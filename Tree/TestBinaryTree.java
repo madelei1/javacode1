@@ -13,12 +13,12 @@ public class TestBinaryTree {
         Node E = new Node('E');
         Node F = new Node('F');
         Node G = new Node('G');
-        Node H = new Node('H');
+        //Node H = new Node('H');
         A.left = B;
         A.right = C;
         B.left = D;
         B.right = E;
-        E.right = H;
+        //E.right = H;
         C.left = F;
         C.right = G;
         return A;
