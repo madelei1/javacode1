@@ -1,5 +1,8 @@
 package Tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class TestBinaryTree {
 
     public Node createTree() {
@@ -119,7 +122,48 @@ public class TestBinaryTree {
         return x > y ? x + 1 : y + 1;
 
     }
-
+    //中序遍历---思路：建立一个队列，将根放进去，然后弹出队列，弹出的时候将弹出节点的左节点和由节点放入进去。
+     void levelOrderTraversal(Node root) {
+        if (root == null) {
+            return;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node x = queue.poll();
+            if (x != null) {
+                System.out.print(x.value+ " ");
+            }
+            if (x.left != null) {
+                queue.offer(x.left);
+            }
+            if (x.right != null) {
+                queue.offer(x.right);
+            }
+        }
+    }
+    // 判断一棵树是不是完全二叉树
+    boolean isCompleteTree(Node root) {
+        if (root == null) {
+            return true;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node x = queue.poll();
+            if (x == null) {
+                while (!queue.isEmpty()) {
+                    if (queue.poll() != null) {
+                        return false;
+                    }
+                }
+            } else {
+                queue.offer(x.left);
+                queue.offer(x.right);
+            }
+        }
+        return true;
+    }
 
 
 }
