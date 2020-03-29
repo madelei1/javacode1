@@ -2,6 +2,7 @@ package Tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class TestBinaryTree {
 
@@ -13,12 +14,12 @@ public class TestBinaryTree {
         Node E = new Node('E');
         Node F = new Node('F');
         Node G = new Node('G');
-        //Node H = new Node('H');
+        Node H = new Node('H');
         A.left = B;
         A.right = C;
         B.left = D;
         B.right = E;
-        //E.right = H;
+        E.right = H;
         C.left = F;
         C.right = G;
         return A;
@@ -164,6 +165,63 @@ public class TestBinaryTree {
         }
         return true;
     }
-
-
+    // 前序遍历
+    void preOrderTraversalNor(Node root) {
+        if (root == null) {
+            return;
+        }
+        Node cur = root;
+        Stack<Node> stack = new Stack<>();
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                System.out.print(cur.value +" ");
+                cur = cur.left;
+            }
+            //cur为null时候说明左树遍历完成，遍历右树
+            Node top = stack.pop();
+            cur = top.right;
+        }
+    }
+    // 中序遍历
+    void inOrderTraversalNor(Node root) {
+        if (root == null) {
+            return;
+        }
+        Node cur = root;
+        Stack<Node> stack = new Stack<>();
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            Node top = stack.pop();
+            System.out.print(top.value + " ");
+            cur = top.right;
+        }
+    }
+    // 后序遍历
+    void postOrderTraversalNor(Node root) {
+        if (root == null) {
+            return;
+        }
+        Node cur = root;
+        Node prev = null;
+        Stack<Node> s = new Stack<>();
+        while (cur != null || !s.isEmpty()) {
+            while (cur != null) {
+                s.push(cur);
+                cur = cur.left;
+            }
+            cur = s.peek();
+            if (cur.right == null || cur.right == prev) {
+                System.out.print(cur.value+" ");
+                s.pop();
+                prev = cur;
+                cur = null;
+            } else {
+                cur = cur.right;
+            }
+        }
+    }
 }
