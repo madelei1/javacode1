@@ -1,7 +1,10 @@
 package PriorityQueue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
+
 
 public class PriorityQueue_Test {
     /**
@@ -71,5 +74,25 @@ public class PriorityQueue_Test {
             System.out.println("优先级队列不为空");
         }
 
+    }
+    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+    private static void grow(int minCapacity) {
+        int[] queue = new int[11];
+        int oldCapacity = queue.length;
+        // 如果原来长度（oldCapacity）小于64--执行oldCapacity+oldCapacity + 2及扩大2倍+2，
+        // 如果大于，扩大1.5倍（oldCapacity >> 1--表示右移除以2的意思）
+        //newCapacity新的长度
+        int newCapacity = oldCapacity + ((oldCapacity < 64) ? (oldCapacity + 2) : (oldCapacity >> 1));
+        if (newCapacity - MAX_ARRAY_SIZE > 0)
+            newCapacity = hugeCapacity(minCapacity);
+        queue = Arrays.copyOf(queue, newCapacity);
+    }
+    //了解--判断给定的minCapacity
+    private static int hugeCapacity(int minCapacity) {
+        if (minCapacity < 0) // overflow
+            throw new OutOfMemoryError();
+        return (minCapacity > MAX_ARRAY_SIZE) ?
+                Integer.MAX_VALUE :
+                MAX_ARRAY_SIZE;
     }
 }
