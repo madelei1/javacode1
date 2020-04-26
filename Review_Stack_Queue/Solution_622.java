@@ -24,38 +24,70 @@ public class Solution_622 {
          */
 
         /** Initialize your data structure here. Set the size of the queue to be k. */
+        int rear;
+        int front;
+        int[] elem;
         public MyCircularQueue(int k) {
+            rear = 0;
+            front = 0;
+            elem = new int[k+1];
 
         }
 
         /** Insert an element into the circular queue. Return true if the operation is successful. */
         public boolean enQueue(int value) {
-
+            if (isFull()) {
+                return false;
+            }
+            elem[rear] = value;
+            rear = (rear+1)% elem.length;
+            return true;
         }
 
         /** Delete an element from the circular queue. Return true if the operation is successful. */
         public boolean deQueue() {
-
+            if (isEmpty()) {
+                return false;
+            }
+            //这里直接跳过整个元素，就相当于删除了，后面rear过来重新赋值，会覆盖了整个值。
+            front = (front+1)% elem.length;
+            return true;
         }
 
         /** Get the front item from the queue. */
         public int Front() {
+            if (isEmpty()) {
+                return -1;
+            }
+            return elem[front];
 
         }
 
         /** Get the last item from the queue. */
         public int Rear() {
-
+            if (isEmpty()) {
+                return -1;
+            }
+            //这里要判断rear是不是==0，如果rear是0则返不能rear-1
+            int index = (this.rear == 0) ? this.elem.length-1 : this.rear-1 ;
+            return this.elem[index];
         }
 
         /** Checks whether the circular queue is empty or not. */
         public boolean isEmpty() {
-
+            if (rear == front) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         /** Checks whether the circular queue is full or not. */
         public boolean isFull() {
-
+            if ((rear+1)%elem.length == front) {
+                return true;
+            }
+            return false;
         }
     }
 
