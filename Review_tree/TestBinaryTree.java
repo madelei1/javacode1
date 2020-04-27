@@ -1,5 +1,9 @@
 package Review_tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class TestBinaryTree {
     class Node {
         Node left;
@@ -25,6 +29,7 @@ public class TestBinaryTree {
         A.right = C;
         B.left = D;
         B.right = E;
+        E.right = H;
         C.left = F;
         C.right = G;
         return A;
@@ -91,8 +96,87 @@ public class TestBinaryTree {
         return getKLevelSize(root.right,k-1)+getKLevelSize(root.left,k-1);
 
     }
+    // 查找 val 所在结点，没有找到返回 null
+    // 按照 根 -> 左子树 -> 右子树的顺序进行查找
+    // 一旦找到，立即返回，不需要继续在其他位置查找
+    Node find(Node root, int val){
+        if (root == null) {
+            return null;
+        }
+        if (root.val == val) {
+            return root;
+        }
+        Node ret ;
+        ret = find(root.left,val);
+        if (ret != null) {
+            return ret;
+        }
+        ret = find(root.right,val);
+        if (ret != null) {
+            return ret;
+        }
+        return null;
+    }
+    // 获取二叉树的高度
+    //先判断左树的高度，在判断右树的高度，最大的为高度
+    int getHeight(Node root){
+        if (root == null) {
+            return 0;
+        }
+        return getHeight(root.left) > getHeight(root.right) ? getHeight(root.left) +1: getHeight(root.right) +1;
+    }
+    //中序遍历
+    void levelOrderTraversal(Node root) {
+        if (root == null) {
+            return;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (queue != null) {
+            Node node = queue.peek();
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+            if (node.left != null) {
+                queue.offer(node.right);
+            }
+            System.out.print(queue.poll());
+        }
+    }
+    // 判断一棵树是不是完全二叉树
+    boolean isCompleteTree(Node root) {
+        if (root == null) {
+            return true;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (queue.isEmpty()) {
+            Node node = queue.poll();
+            if (node == null) {
+                while (queue.isEmpty()) {
+                    if (queue.poll() != null) {
+                        return false;
+                    }
+                }
+            } else {
+                queue.offer(node.left);
+                queue.offer(node.right);
+            }
+        }
+        return true;
+    }
+    // 前序遍历
+    void preOrderTraversalNor(Node root) {
+        if(root == null) {
+            return;
+        }
+        Node node = root;
+        Stack<Node> stack = new Stack<>();
 
-
+        while (node != null ||!stack.isEmpty()) {
+            stack.push(node);
+        }
+    }
 
 
 
