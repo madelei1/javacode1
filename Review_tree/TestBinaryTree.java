@@ -8,7 +8,7 @@ public class TestBinaryTree {
     class Node {
         Node left;
         Node right;
-        int val;
+        char val;
         public Node(char value) {
             this.val = value;
             this.left = null;
@@ -42,7 +42,7 @@ public class TestBinaryTree {
         if (root == null) {
             return;
         }
-        System.out.println(root.val);
+        System.out.print(root.val+ " ");
         preOrderTraversal(root.left);
         preOrderTraversal(root.right);
 
@@ -53,7 +53,7 @@ public class TestBinaryTree {
             return;
         }
         inOrderTraversal(root.left);
-        System.out.println(root.val);
+        System.out.print(root.val+" ");
         inOrderTraversal(root.right);
     }
 
@@ -65,7 +65,7 @@ public class TestBinaryTree {
         }
         preOrderTraversal(root.left);
         postOrderTraversal(root.right);
-        System.out.println(root.val);
+        System.out.print(root.val+" ");
     }
     //节点的个数
     int getSize2(Node root){
@@ -132,15 +132,18 @@ public class TestBinaryTree {
         }
         Queue<Node> queue = new LinkedList<>();
         queue.offer(root);
-        while (queue != null) {
-            Node node = queue.peek();
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            if (node != null) {
+                System.out.print(node.val);
+            }
             if (node.left != null) {
                 queue.offer(node.left);
             }
-            if (node.left != null) {
+            if (node.right != null) {
                 queue.offer(node.right);
             }
-            System.out.print(queue.poll());
+
         }
     }
     // 判断一棵树是不是完全二叉树
@@ -174,7 +177,58 @@ public class TestBinaryTree {
         Stack<Node> stack = new Stack<>();
 
         while (node != null ||!stack.isEmpty()) {
-            stack.push(node);
+            while (node != null) {
+                stack.push(node);
+                System.out.print(node.val +" ");
+                node = node.left;
+            }
+            Node x = stack.pop();
+            node = x.right;
+        }
+    }
+
+    // 中序遍历
+    void inOrderTraversalNor(Node root) {
+        if (root == null) {
+            return;
+        }
+        Node cur = root;
+        Stack<Node> stack = new Stack<>();
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            Node x = stack.pop();
+            System.out.print(x.val+ " ");
+            cur = x.right;
+        }
+    }
+    // 后序遍历
+    void postOrderTraversalNor(Node root) {
+        if (root == null) {
+            return;
+        }
+        Stack<Node> stack = new Stack<>();
+        Node cur = root;
+        Node prev = null;
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.peek();
+
+            //这里判断多一个条件的原因是，如果只判断cur.right会进入死循环，重复在栈中添加cur.right
+            //通过添加一个prev来判断是否添加过了
+            if (cur.right == null || cur.right == prev) {
+                System.out.print(cur.val+" ");
+                stack.pop();
+                prev = cur;
+                cur = null;
+            } else {
+                cur = cur.right;
+            }
         }
     }
 
