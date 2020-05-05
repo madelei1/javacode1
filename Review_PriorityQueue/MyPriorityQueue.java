@@ -2,35 +2,33 @@ package Review_PriorityQueue;
 
 public class MyPriorityQueue {
 
-    public MyPriorityQueue() {
+    private int[] array = new int[100];
+    private int size = 0;
+    Heap1 heap1 = new Heap1();
+
+    public void offer1(int val) {
+        heap1.push(val);
 
     }
-    public boolean offer1(int val) {
+    public void poll1() {
 
-
-        return false;
-    }
-    public boolean poll1() {
-
-        return false;
+        heap1.pop();
     }
     public int size1() {
 
-        return 0;
+        return heap1.useSize;
     }
     public boolean isEmpty1() {
 
-        return false;
+        return heap1.isEmpty();
     }
-    public void clear1() {
 
-    }
     public boolean contains1(int val) {
-
-        return false;
-    }
-    public boolean remove1(int val) {
-
+        for (int i = 0; i < heap1.elem.length; i++) {
+            if(heap1.elem[i] == val) {
+                return true;
+            }
+        }
         return false;
     }
 
