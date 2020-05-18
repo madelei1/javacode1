@@ -1,6 +1,10 @@
 package Review_mapAndset;
 
 public class Test {
+    /**
+     * 测试二叉搜索树
+     * @param args
+     */
     public static void main(String[] args) {
 
         int[] array = {5,3,4,1,7,8,2,6,0,9};
