@@ -18,6 +18,9 @@ public class Test {
         binarySearchTree.remove(9);
         binarySearchTree.preOrder(binarySearchTree.root);
         System.out.println();
-
+        /*int x = 4;
+        int y = x << 1;
+        System.out.println(y);
+*/
     }
 }

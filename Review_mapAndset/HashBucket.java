@@ -1,3 +1,4 @@
+package Review_mapAndset;
 
 public class HashBucket {
     static class Node {
@@ -10,61 +11,69 @@ public class HashBucket {
             this.value = value;
         }
     }
-    public Node[] array;//单链表的头结点的引用
-    public int usedSize;//记录当前已经存放了多少个数据了   负载因子：哈希表的个数/哈希表的长度
+    public Node[] array;
+    public int useSize;
     public HashBucket() {
         this.array = new Node[8];
-        this.usedSize = 0;
+        this.useSize = 0;
     }
-    //put方法
+    //put 方法
     public void put(int key,int value) {
-        int index = key % this.array.length;//下标
+        int index = key % array.length;
 
-        //2、遍历index下标的这个单链表 看是否存在数据 key,如果存在  那么更新value值。
-        for (Node cur =  array[index]; cur != null ; cur = cur.next ) {
-            if(cur.key == key) {
+        for (Node cur = array[index]; cur != null; cur = cur.next) {
+            if (cur.key == key) {
                 cur.value = value;
                 return;
             }
         }
-        //3、说明没有当前Key
         Node node = new Node(key,value);
-        node.next = array[index];
+        Node cur = array[index];
+        node.next = cur;
         array[index] = node;
-        this.usedSize++;
-        if(loadFactor() >= 0.75) {
+        useSize ++;
+
+        //判断是否需要扩容
+        if (loadFactor() >= 0.75) {
             resize();
         }
     }
 
+    /**
+     *负载因子
+     * @return
+     */
     private double loadFactor() {
-        return usedSize*1.0 / array.length;
+        return useSize*1.0/array.length;
     }
 
+    /**
+     * 扩容
+     */
     private void resize() {
-        Node[] newArray = new Node[array.length*2];
-        //1、遍历原来的数组  把原来的数据 重新哈希到新的数组当中
+        Node[] newArray = new Node[array.length << 1];
         for (int i = 0; i < array.length; i++) {
             Node curNext;
-            for (Node cur = array[i];cur != null;cur = curNext) {
-                curNext = cur.next;//保护原来的next
-                int index = cur.key % newArray.length;//newArray中新的index下标
-                //头插到新的数组的 index位置
+            for (Node cur = array[i]; cur != null; cur = curNext) {
+                curNext = cur.next;
+                int index = cur.key/newArray.length;
                 cur.next = newArray[index];
                 newArray[index] = cur;
             }
         }
-        this.array = newArray;
+        array = newArray;
+
     }
 
+    //get
     public int getValue(int key) {
         int index = key % array.length;
-        for (Node cur = array[index]; cur != null;cur = cur.next) {
-            if(cur.key == key) {
+        Node node = array[index];
+        for (Node cur = node; cur != null; cur = cur.next) {
+            if (cur.key == key) {
                 return cur.value;
             }
         }
         return -1;
     }
-
 }
