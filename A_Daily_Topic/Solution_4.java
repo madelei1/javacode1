@@ -3,6 +3,11 @@ package A_Daily_Topic;
 import java.util.Scanner;
 
 public class Solution_4 {
+    /**
+     * 字符串中找出连续最长的数字串
+     * https://www.nowcoder.com/practice/bd891093881d4ddf9e56e7cc8416562d?tpId=179&&tqId=34157&rp=1&ru=/activity/oj&qru=/ta/exam-other/question-ranking
+     * @param args
+     */
     public static void main(String[] args) {
 
         /*Scanner sc = new Scanner(System.in);

@@ -1,7 +1,10 @@
 package A_Daily_Topic;
 import java.util.*;
 public class Solution2 {
-
+    /**
+     * 数组中的逆序对
+     * @param args
+     */
     public static void main(String[] args) {
         int[] a = {1,2,3,5,6,7,0,4};
         p1(a);

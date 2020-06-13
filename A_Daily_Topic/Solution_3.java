@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Solution_3 {
     /**
+     * 汽水瓶
      * https://www.nowcoder.com/practice/fe298c55694f4ed39e256170ff2c205f?tpId=37&&tqId=21245&rp=1&ru=/activity/oj&qru=/ta/huawei/question-ranking
      */
     static int m = 0;
