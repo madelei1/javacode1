@@ -1,4 +1,4 @@
-package Review_001;
+package Review_001.Stack_Queue;
 
 public class Queue_0 {
     class Node {

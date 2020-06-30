@@ -1,4 +1,4 @@
-package Review_001;
+package Review_001.Stack_Queue;
 
 import java.util.Stack;
 

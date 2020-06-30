@@ -1,4 +1,4 @@
-package Review_001;
+package Review_001.Stack_Queue;
 
 public class Test {
     public static void main(String[] args) {
