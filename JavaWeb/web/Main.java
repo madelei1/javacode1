@@ -34,6 +34,7 @@ public class Main {
             System.out.println(str);
             System.out.println(string);
         }
+	
         resultSet.close();
         statement.close();
         connection.close();
