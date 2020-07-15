@@ -9,6 +9,7 @@ public class User {
     private String address;
     private String qq;
     private String email;
+    private int id;
 
     public String getName() {
         return name;
@@ -40,6 +41,14 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {

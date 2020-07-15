@@ -32,9 +32,9 @@ public class DBUtil {
         return DATASOURCE;
     }
     public static Connection getConnection(){
-        System.out.println("getConnection1");
+        //System.out.println("getConnection1");
         try {
-//从池子里获取连接
+    //从池子里获取连接
             Connection connection = getDataSource().getConnection();
             return connection;
         } catch (SQLException e) {
